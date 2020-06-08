@@ -9,11 +9,11 @@ function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-blue-grey mdui-theme-accent-blue");
     var html = `
-<header class="mdui-appbar mdui-color-theme"> 
-   <div id="nav" class="mdui-toolbar mdui-container"> 
-   </div> 
+<header class="mdui-appbar mdui-color-theme">
+   <div id="nav" class="mdui-toolbar mdui-container">
+   </div>
 </header>
-<div id="content" class="mdui-container"> 
+<div id="content" class="mdui-container">
 </div>
 	`;
     $('body').html(html);
@@ -64,32 +64,32 @@ function list(path){
 	var content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
 
-	 <div class="mdui-row"> 
-	  <ul class="mdui-list"> 
-	   <li class="mdui-list-item th"> 
+	 <div class="mdui-row">
+	  <ul class="mdui-list">
+	   <li class="mdui-list-item th">
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
 	     File
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
-	    </div> 
+	    </div>
 	    <div class="mdui-col-sm-3 mdui-text-right">
 	     Date Modified
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
-	    </div> 
+	    </div>
 	    <div class="mdui-col-sm-2 mdui-text-right">
 	     Size
 	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
-	    </div> 
-	    </li> 
-	  </ul> 
-	 </div> 
-	 <div class="mdui-row"> 
-	  <ul id="list" class="mdui-list"> 
-	  </ul> 
+	    </div>
+	    </li>
+	  </ul>
+	 </div>
+	 <div class="mdui-row">
+	  <ul id="list" class="mdui-list">
+	  </ul>
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
 	$('#content').html(content);
-	
+
     var password = localStorage.getItem('password'+path);
     $('#list').html(`<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>`);
     $('#readme_md').hide().html('');
@@ -194,7 +194,7 @@ function file(path){
 	if("|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
 		return file_video(path);
 	}
-	
+
 	if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
@@ -216,7 +216,7 @@ function file_code(path){
 		"json":"json",
 		"txt":"Text",
 		"sh":"sh",
-		"md":"Markdown",	
+		"md":"Markdown",
 	};
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop();
@@ -226,7 +226,7 @@ function file_code(path){
 <pre id="editor" ></pre>
 </div>
 <div class="mdui-textfield">
-	<label class="mdui-textfield-label">下载地址</label>
+	<label class="mdui-textfield-label">URL</label>
 	<input class="mdui-textfield-input" type="text" value="${href}"/>
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
@@ -235,7 +235,7 @@ function file_code(path){
 <script src="https://cdn.staticfile.org/ace/1.4.7/ext-language_tools.js"></script>
 	`;
 	$('#content').html(content);
-	
+
 	$.get(path, function(data){
 		$('#editor').html($('<div/>').text(data).html());
 		var code_type = "Text";
@@ -246,7 +246,7 @@ function file_code(path){
 	    editor.setTheme("ace/theme/ambiance");
 	    editor.setFontSize(18);
 	    editor.session.setMode("ace/mode/"+code_type);
-	    
+
 	    //Autocompletion
 	    editor.setOptions({
 	        enableBasicAutocompletion: true,
@@ -273,7 +273,7 @@ function file_video(path){
 	<br>${playBtn}
 	<!-- 固定标签 -->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">URL</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
@@ -298,7 +298,7 @@ function file_audio(path){
 	<br>
 	<!-- 固定标签 -->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">URL</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
@@ -321,7 +321,7 @@ function file_image(path){
 	<img class="mdui-img-fluid" src="${url}"/>
 	<br>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">下载地址</label>
+	  <label class="mdui-textfield-label">URL</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
@@ -426,6 +426,6 @@ $(function(){
         render(url);
         return false;
     });
-    
+
     render(path);
 });
